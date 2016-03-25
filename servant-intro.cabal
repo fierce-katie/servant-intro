@@ -12,6 +12,7 @@ library
   exposed-modules:     API
                      , Book
                      , Server
+                     , Client
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , servant
