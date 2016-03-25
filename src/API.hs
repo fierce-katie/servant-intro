@@ -6,6 +6,8 @@ module API where
 import Book
 import Servant.API
 
+type BookshopAPI = "books" :> BooksAPI
+
 type BooksAPI
      = Get '[JSON] [Book]
   :<|> ReqBody '[JSON] Book      :> Post '[JSON] BookId

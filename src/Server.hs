@@ -7,8 +7,11 @@ import Control.Monad.Trans.Either
 
 type ServantResponse a = EitherT ServantErr IO a
 
-server :: Server BooksAPI
-server = listBooks :<|> addBook :<|> getBook :<|> deleteBook :<|> updateBook
+server :: Server BookshopAPI
+server = serveBooks
+
+serveBooks :: Server BooksAPI
+serveBooks = listBooks :<|> addBook :<|> getBook :<|> deleteBook :<|> updateBook
 
 listBooks :: ServantResponse [Book]
 listBooks = undefined
