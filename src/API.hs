@@ -9,7 +9,7 @@ import Servant.API
 type BookshopAPI = "books" :> BooksAPI
 
 type BooksAPI
-     = Get '[JSON] [Book]
+     = Get '[JSON] [(BookId, Book)]
   :<|> ReqBody '[JSON] Book      :> Post '[JSON] BookId
   :<|> Capture "book_id" BookId  :> Get '[JSON] Book
   :<|> Capture "book_id" BookId  :> Delete '[JSON] ()
