@@ -1,4 +1,8 @@
+{-# LANGUAGE DeriveGeneric #-}
 module Book where
+
+import Data.Aeson
+import GHC.Generics (Generic)
 
 type BookId = Int
 
