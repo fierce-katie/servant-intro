@@ -8,6 +8,9 @@ import Servant.API
 
 type BookshopAPI = "books" :> BooksAPI
 
+-- RESTful API for books.
+-- /books (GET | POST)
+-- /books/:book_id (GET | DELETE | PUT)
 type BooksAPI
      = Get '[JSON] [(BookId, Book)]
   :<|> ReqBody '[JSON] Book      :> Post '[JSON] BookId

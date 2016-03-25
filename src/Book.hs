@@ -4,6 +4,7 @@ module Book where
 import Data.Aeson
 import GHC.Generics (Generic)
 
+-- Just an assoc. list of some books.
 bookStore :: [(BookId, Book)]
 bookStore = zip [1..]
   [ Book
@@ -23,8 +24,10 @@ bookStore = zip [1..]
       231
   ]
 
+-- Book ID.
 type BookId = Int
 
+-- Book representation.
 data Book = Book
   { bookAuthor  :: String
   , bookTitle   :: String
@@ -32,6 +35,7 @@ data Book = Book
   , bookInStock :: Int
   } deriving Generic
 
+-- Instances to convert Book to JSON.
 instance ToJSON Book
 instance FromJSON Book
 
