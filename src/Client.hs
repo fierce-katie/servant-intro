@@ -14,7 +14,7 @@ type ServantResponse a = ExceptT ServantError IO a
 
 -- BaseUrl for localhost:8800
 localhost8800 :: BaseUrl
-localhost8800 = BaseUrl Http "localhost" 8800 ""
+localhost8800 = BaseUrl Http "localhost" 8800 "/books"
 
 -- Make client given server's base URL.
 mkAPIClient :: BaseUrl -> Manager -> Client BooksAPI

@@ -33,7 +33,7 @@ data Book = Book
   , bookTitle   :: String
   , bookYear    :: Int
   , bookInStock :: Int
-  } deriving Generic
+  } deriving (Show, Generic)
 
 -- Instances to convert Book to JSON.
 instance ToJSON Book
