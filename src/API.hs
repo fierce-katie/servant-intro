@@ -3,8 +3,9 @@
 
 module API where
 
-import Book
 import Servant.API
+
+import Book
 
 type BookshopAPI = "books" :> BooksAPI
 

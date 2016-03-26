@@ -6,5 +6,6 @@ extra-deps:
 - servant-client-0.5
 - servant-server-0.5
 - servant-docs-0.5
+- control-monad-omega-0.3.1
 flags: {}
 extra-package-dbs: []
