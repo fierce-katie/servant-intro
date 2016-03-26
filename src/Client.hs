@@ -2,17 +2,22 @@
 module Client where
 
 import Data.Proxy
-import Control.Monad.Trans.Either
+import Control.Monad.Trans.Except
+import Network.HTTP.Client hiding (Proxy)
 import Servant
 import Servant.Client
 
 import API
 import Book
 
-type ServantResponse a = EitherT ServantError IO a
+type ServantResponse a = ExceptT ServantError IO a
+
+-- BaseUrl for localhost:8800
+localhost8800 :: BaseUrl
+localhost8800 = BaseUrl Http "localhost" 8800 ""
 
 -- Make client given server's base URL.
-mkAPIClient :: BaseUrl -> Client BooksAPI
+mkAPIClient :: BaseUrl -> Manager -> Client BooksAPI
 mkAPIClient = client (Proxy :: Proxy BooksAPI)
 
 -- Client functions according to BooksAPI.
@@ -24,11 +29,17 @@ data BooksClient = BooksClient
   , updateBook :: BookId -> Maybe String -> Maybe String -> Maybe Int -> Maybe Int -> ServantResponse Book
   }
 
+-- Make bookshop client with manager.
+mkClientWithManager :: IO BooksClient
+mkClientWithManager = do
+  manager <- newManager defaultManagerSettings
+  mkBookshopClient manager
+
 -- Make bookshop client.
-mkBookshopCLient :: BaseUrl -> BooksClient
-mkBookshopCLient url = BooksClient{..}
+mkBookshopClient :: Manager -> IO BooksClient
+mkBookshopClient manager = return BooksClient{..}
   where
-    booksClient = mkAPIClient url
+    booksClient = mkAPIClient localhost8800 manager
 
     (listBooks
       :<|> addBook

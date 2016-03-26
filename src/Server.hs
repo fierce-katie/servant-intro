@@ -2,14 +2,14 @@
 module Server where
 
 import Servant
-import Control.Monad.Trans.Either
+import Control.Monad.Trans.Except
 import Control.Monad.Except
 import Data.Maybe
 
 import API
 import Book
 
-type ServantResponse a = EitherT ServantErr IO a
+type ServantResponse a = ExceptT ServantErr IO a
 
 -- Server for BookshopAPI
 server :: Server BookshopAPI

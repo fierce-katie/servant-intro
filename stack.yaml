@@ -1,6 +1,10 @@
-resolver: lts-5.0
+resolver: lts-5.9
 packages:
 - '.'
-extra-deps: []
+extra-deps:
+- servant-0.5
+- servant-client-0.5
+- servant-server-0.5
+- servant-docs-0.5
 flags: {}
 extra-package-dbs: []

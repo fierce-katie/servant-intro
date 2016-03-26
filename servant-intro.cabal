@@ -18,8 +18,9 @@ library
                      , servant
                      , servant-server
                      , servant-client
-                     , either
                      , mtl
+                     , transformers
+                     , http-client
   default-language:    Haskell2010
 
 executable servant-intro-exe
