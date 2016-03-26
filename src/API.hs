@@ -19,5 +19,5 @@ type BooksAPI
   :<|> Capture "book_id" BookId  :> Delete '[JSON] ()
   :<|> Capture "book_id" BookId  :> QueryParam "author" String :>
        QueryParam "title" String :> QueryParam "year" Int      :>
-       QueryParam "in_stock" Int :> Post '[JSON] Book
+       QueryParam "in_stock" Int :> Put '[JSON] Book
 
