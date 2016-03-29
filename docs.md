@@ -1,4 +1,4 @@
-## GET /
+## GET /books
 
 #### Authentication
 
@@ -22,7 +22,7 @@ Clients must supply the following data
 []
 ```
 
-## POST /
+## POST /books
 
 #### Authentication
 
@@ -48,7 +48,7 @@ Clients must supply the following data
 
 - No response body
 
-## DELETE /:book_id
+## DELETE /books/:book_id
 
 #### Authentication
 
@@ -76,7 +76,7 @@ Clients must supply the following data
 []
 ```
 
-## GET /:book_id
+## GET /books/:book_id
 
 #### Authentication
 
@@ -100,7 +100,7 @@ Clients must supply the following data
 
 - No response body
 
-## POST /:book_id
+## PUT /books/:book_id
 
 #### Authentication
 

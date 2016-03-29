@@ -11,7 +11,7 @@ import Book
 
 -- Generate documentation for given API.
 apiDocs :: API
-apiDocs = docs (Proxy :: Proxy BooksAPI)
+apiDocs = docs (Proxy :: Proxy BookshopAPI)
 
 -- Save generated documentation to docs.md.
 saveDocs :: IO ()

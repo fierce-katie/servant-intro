@@ -11,23 +11,23 @@ import Book
 
 type ServantResponse a = ExceptT ServantErr IO a
 
--- Server for BookshopAPI
+-- Server for BookshopAPI.
 server :: Server BookshopAPI
 server = serveBooks
 
--- Server for BooksAPI
+-- Server for BooksAPI.
 serveBooks :: Server BooksAPI
 serveBooks = listBooks :<|> addBook :<|> getBook :<|> deleteBook :<|> updateBook
 
--- /books (GET)
+-- GET /books
 listBooks :: ServantResponse [(BookId, Book)]
 listBooks = return bookStore
 
--- /books (POST)
+-- POST /books
 addBook :: Book -> ServantResponse BookId
 addBook _ = throwError err501
 
--- /book/:book_id (GET)
+-- GET /book/:book_id
 getBook :: BookId -> ServantResponse Book
 getBook bid = do
   let mbook = lookup bid bookStore
@@ -35,11 +35,11 @@ getBook bid = do
     Just book -> return book
     Nothing -> throwError err404
 
--- /book/:book_id (DELETE)
+-- DELETE /book/:book_id
 deleteBook :: BookId -> ServantResponse ()
 deleteBook _ = throwError err501
 
--- /book/:book_id (PUT)
+-- PUT /book/:book_id
 updateBook :: BookId -> Maybe String -> Maybe String -> Maybe Int -> Maybe Int -> ServantResponse Book
 updateBook _ Nothing Nothing Nothing Nothing = throwError err400
 updateBook bid mname mtitle myear mn = do
