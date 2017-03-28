@@ -8,6 +8,8 @@ import Data.Aeson.Encode.Pretty
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.Text as Text
 import Data.Text.Encoding
+import Data.Swagger hiding (SchemaOptions(..), name, prefix)
+import qualified Data.Swagger as S
 import GHC.Generics (Generic)
 
 import Utils
@@ -46,5 +48,9 @@ data Book = Book
 ppBookJSON :: Book -> IO ()
 ppBookJSON = putStrLn . Text.unpack . decodeUtf8 . BSL.toStrict . encodePretty
 
+instance ToSchema Book where
+  declareNamedSchema = genericDeclareNamedSchema defaultSchemaOptions { S.fieldLabelModifier = camelCaseName "Book" }
+
 -- Instances to convert Book to JSON.
 deriveJSON defaultOptions { fieldLabelModifier = camelCaseName "Book" } ''Book
+

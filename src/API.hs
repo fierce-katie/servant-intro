@@ -3,7 +3,11 @@
 
 module API where
 
+import Data.Proxy
+import Data.Swagger
+
 import Servant.API
+import Servant.Swagger
 
 import Book
 
@@ -19,3 +23,6 @@ type BooksAPI
        QueryParam "title" String :> QueryParam "year" Int      :>
        QueryParam "in_stock" Int :> Put '[JSON] Book
 
+-- | BooksAPI Swagger specification.
+booksSwagger :: Swagger
+booksSwagger = toSwagger (Proxy :: Proxy BooksAPI)
