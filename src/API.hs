@@ -7,8 +7,6 @@ import Servant.API
 
 import Book
 
-type BookshopAPI = "books" :> BooksAPI
-
 -- RESTful API for books.
 -- /books (GET | POST)
 -- /books/:book_id (GET | DELETE | PUT)

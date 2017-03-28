@@ -12,5 +12,5 @@ main :: IO ()
 main = run 8800 app
 
 app :: Application
-app = serve (Proxy :: Proxy BookshopAPI) server
+app = serve (Proxy :: Proxy BooksAPI) serveBooks
 

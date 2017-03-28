@@ -13,13 +13,12 @@ library
                      , Book
                      , Server
                      , Client
-                     , Docs
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , servant
                      , servant-server
                      , servant-client
-                     , servant-docs
+                     , generics-sop
                      , mtl
                      , transformers
                      , http-client

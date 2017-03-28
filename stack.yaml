@@ -1,11 +1,9 @@
-resolver: lts-5.9
+resolver: lts-8.6
 packages:
 - '.'
 extra-deps:
-- servant-0.5
-- servant-client-0.5
-- servant-server-0.5
-- servant-docs-0.5
-- control-monad-omega-0.3.1
+- servant-0.10
+- servant-client-0.10
+- servant-server-0.10
 flags: {}
 extra-package-dbs: []

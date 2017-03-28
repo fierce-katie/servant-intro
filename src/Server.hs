@@ -9,26 +9,20 @@ import Data.Maybe
 import API
 import Book
 
-type ServantResponse a = ExceptT ServantErr IO a
-
--- Server for BookshopAPI.
-server :: Server BookshopAPI
-server = serveBooks
-
 -- Server for BooksAPI.
 serveBooks :: Server BooksAPI
 serveBooks = listBooks :<|> addBook :<|> getBook :<|> deleteBook :<|> updateBook
 
 -- GET /books
-listBooks :: ServantResponse [(BookId, Book)]
+listBooks :: Handler [(BookId, Book)]
 listBooks = return bookStore
 
 -- POST /books
-addBook :: Book -> ServantResponse BookId
+addBook :: Book -> Handler BookId
 addBook _ = throwError err501
 
 -- GET /book/:book_id
-getBook :: BookId -> ServantResponse Book
+getBook :: BookId -> Handler Book
 getBook bid = do
   let mbook = lookup bid bookStore
   case mbook of
@@ -36,11 +30,11 @@ getBook bid = do
     Nothing -> throwError err404
 
 -- DELETE /book/:book_id
-deleteBook :: BookId -> ServantResponse ()
+deleteBook :: BookId -> Handler ()
 deleteBook _ = throwError err501
 
 -- PUT /book/:book_id
-updateBook :: BookId -> Maybe String -> Maybe String -> Maybe Int -> Maybe Int -> ServantResponse Book
+updateBook :: BookId -> Maybe String -> Maybe String -> Maybe Int -> Maybe Int -> Handler Book
 updateBook _ Nothing Nothing Nothing Nothing = throwError err400
 updateBook bid mname mtitle myear mn = do
   let mbook = lookup bid bookStore
