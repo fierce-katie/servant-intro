@@ -1,8 +1,16 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE TemplateHaskell #-}
 module Book where
 
 import Data.Aeson
+import Data.Aeson.TH
+import Data.Aeson.Encode.Pretty
+import qualified Data.ByteString.Lazy as BSL
+import qualified Data.Text as Text
+import Data.Text.Encoding
 import GHC.Generics (Generic)
+
+import Utils
 
 -- Just an assoc. list of some books.
 bookStore :: [(BookId, Book)]
@@ -35,7 +43,8 @@ data Book = Book
   , bookInStock :: Int
   } deriving (Show, Generic)
 
--- Instances to convert Book to JSON.
-instance ToJSON Book
-instance FromJSON Book
+ppBookJSON :: Book -> IO ()
+ppBookJSON = putStrLn . Text.unpack . decodeUtf8 . BSL.toStrict . encodePretty
 
+-- Instances to convert Book to JSON.
+deriveJSON defaultOptions { fieldLabelModifier = camelCaseName "Book" } ''Book

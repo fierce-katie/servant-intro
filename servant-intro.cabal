@@ -13,13 +13,18 @@ library
                      , Book
                      , Server
                      , Client
+                     , Utils
   build-depends:       base >= 4.7 && < 5
                      , aeson
+                     , aeson-pretty
+                     , bytestring
                      , servant
                      , servant-server
                      , servant-client
                      , generics-sop
                      , mtl
+                     , split
+                     , text
                      , transformers
                      , http-client
   default-language:    Haskell2010
