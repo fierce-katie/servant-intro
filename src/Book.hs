@@ -11,6 +11,7 @@ import Data.Text.Encoding
 import Data.Swagger hiding (SchemaOptions(..), name, prefix)
 import qualified Data.Swagger as S
 import GHC.Generics (Generic)
+import Test.QuickCheck
 
 import Utils
 
@@ -54,3 +55,5 @@ instance ToSchema Book where
 -- Instances to convert Book to JSON.
 deriveJSON defaultOptions { fieldLabelModifier = camelCaseName "Book" } ''Book
 
+instance Arbitrary Book where
+  arbitrary = Book <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

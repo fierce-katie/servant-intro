@@ -34,7 +34,7 @@
         }
     },
     "paths": {
-        "/{book_id}": {
+        "/books/{book_id}": {
             "get": {
                 "responses": {
                     "404": {
@@ -142,7 +142,7 @@
                 ]
             }
         },
-        "/": {
+        "/books": {
             "post": {
                 "consumes": [
                     "application/json;charset=utf-8"
