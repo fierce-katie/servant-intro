@@ -1,8 +1,13 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 module API where
 
+import Control.Lens
+import qualified Data.ByteString.Lazy.Char8 as BL8
+
+import Data.Aeson.Encode.Pretty
 import Data.Proxy
 import Data.Swagger
 
@@ -26,3 +31,9 @@ type BooksAPI
 -- | BooksAPI Swagger specification.
 booksSwagger :: Swagger
 booksSwagger = toSwagger (Proxy :: Proxy BooksAPI)
+  & info.title .~ "Books API"
+  & info.version .~ "0.1"
+
+writeSwagger :: IO ()
+writeSwagger = BL8.writeFile "swagger.json" (encodePretty booksSwagger)
+

@@ -1,0 +1,205 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.1",
+        "title": "Books API"
+    },
+    "definitions": {
+        "Book": {
+            "required": [
+                "author",
+                "title",
+                "year",
+                "inStock"
+            ],
+            "type": "object",
+            "properties": {
+                "year": {
+                    "maximum": 9223372036854775807,
+                    "minimum": -9223372036854775808,
+                    "type": "integer"
+                },
+                "inStock": {
+                    "maximum": 9223372036854775807,
+                    "minimum": -9223372036854775808,
+                    "type": "integer"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "paths": {
+        "/{book_id}": {
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "`book_id` not found"
+                    },
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Book"
+                        },
+                        "description": ""
+                    }
+                },
+                "produces": [
+                    "application/json;charset=utf-8"
+                ],
+                "parameters": [
+                    {
+                        "maximum": 9223372036854775807,
+                        "minimum": -9223372036854775808,
+                        "required": true,
+                        "in": "path",
+                        "name": "book_id",
+                        "type": "integer"
+                    }
+                ]
+            },
+            "delete": {
+                "responses": {
+                    "404": {
+                        "description": "`book_id` not found"
+                    },
+                    "200": {
+                        "schema": {
+                            "items": [],
+                            "type": "array"
+                        },
+                        "description": ""
+                    }
+                },
+                "produces": [
+                    "application/json;charset=utf-8"
+                ],
+                "parameters": [
+                    {
+                        "maximum": 9223372036854775807,
+                        "minimum": -9223372036854775808,
+                        "required": true,
+                        "in": "path",
+                        "name": "book_id",
+                        "type": "integer"
+                    }
+                ]
+            },
+            "put": {
+                "responses": {
+                    "404": {
+                        "description": "`book_id` not found"
+                    },
+                    "400": {
+                        "description": "Invalid `in_stock` or `year` or `title` or `author`"
+                    },
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Book"
+                        },
+                        "description": ""
+                    }
+                },
+                "produces": [
+                    "application/json;charset=utf-8"
+                ],
+                "parameters": [
+                    {
+                        "maximum": 9223372036854775807,
+                        "minimum": -9223372036854775808,
+                        "required": true,
+                        "in": "path",
+                        "name": "book_id",
+                        "type": "integer"
+                    },
+                    {
+                        "in": "query",
+                        "name": "author",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "title",
+                        "type": "string"
+                    },
+                    {
+                        "maximum": 9223372036854775807,
+                        "minimum": -9223372036854775808,
+                        "in": "query",
+                        "name": "year",
+                        "type": "integer"
+                    },
+                    {
+                        "maximum": 9223372036854775807,
+                        "minimum": -9223372036854775808,
+                        "in": "query",
+                        "name": "in_stock",
+                        "type": "integer"
+                    }
+                ]
+            }
+        },
+        "/": {
+            "post": {
+                "consumes": [
+                    "application/json;charset=utf-8"
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid `body`"
+                    },
+                    "200": {
+                        "schema": {
+                            "maximum": 9223372036854775807,
+                            "minimum": -9223372036854775808,
+                            "type": "integer"
+                        },
+                        "description": ""
+                    }
+                },
+                "produces": [
+                    "application/json;charset=utf-8"
+                ],
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Book"
+                        },
+                        "in": "body",
+                        "name": "body"
+                    }
+                ]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "items": {
+                                "items": [
+                                    {
+                                        "maximum": 9223372036854775807,
+                                        "minimum": -9223372036854775808,
+                                        "type": "integer"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/Book"
+                                    }
+                                ],
+                                "type": "array"
+                            },
+                            "type": "array"
+                        },
+                        "description": ""
+                    }
+                },
+                "produces": [
+                    "application/json;charset=utf-8"
+                ]
+            }
+        }
+    }
+}
