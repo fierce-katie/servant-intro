@@ -13,8 +13,17 @@ import Data.Swagger
 
 import Servant.API
 import Servant.Swagger
+import Servant.Swagger.UI
 
 import Book
+
+type API
+     = SwaggerSchemaEndpoint
+  :<|> SwaggerSchemaUI "docs" "swagger.json"
+  :<|> "books" :> BooksAPI
+
+-- | Swagger schema endpoint.
+type SwaggerSchemaEndpoint = "swagger.json" :> Get '[JSON] Swagger
 
 -- RESTful API for books.
 -- /books (GET | POST)
@@ -30,7 +39,7 @@ type BooksAPI
 
 -- | BooksAPI Swagger specification.
 booksSwagger :: Swagger
-booksSwagger = toSwagger (Proxy :: Proxy BooksAPI)
+booksSwagger = toSwagger (Proxy :: Proxy ("books" :> BooksAPI))
   & info.title .~ "Books API"
   & info.version .~ "0.1"
 
